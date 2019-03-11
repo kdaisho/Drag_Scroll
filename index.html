@@ -43,30 +43,56 @@ let isDown = false
 let startX;
 let scrollLeft;
 
-slider.addEventListener("mousedown", (e) => {
+slider.addEventListener("touchstart", (e) => {
 	isDown = true;
 	slider.classList.add('active');
 	startX = e.pageX - slider.offsetLeft;
 	scrollLeft = slider.scrollLeft;
 });
 
-slider.addEventListener("mouseleave", () => {
+slider.addEventListener("touchend", () => {
 	isDown = false;
 	slider.classList.remove('active');
 });
 
-slider.addEventListener("mouseup", () => {
-	isDown = false;
-	slider.classList.remove('active');
-});
+// slider.addEventListener("touchmove", () => {
+// 	isDown = false;
+// 	slider.classList.remove('active');
+// });
 
-slider.addEventListener("mousemove", (e) => {
+slider.addEventListener("touchmove", (e) => {
 	if(!isDown) return;
-	e.preventDefault();
+	// e.preventDefault();
 	const x = e.pageX - slider.offsetLeft;
 	const walk = (x - startX) * 3;
 	slider.scrollLeft = scrollLeft - walk;
 });
+
+// function addListenerMulti(obj, actions, fn) {
+// 	const actionArray = actions.split(" ");
+// 	for (let i = 0; i < actionArray.length; i++) {
+// 		obj.addEventListener(actionArray[i], fn, false);
+// 	}
+// }
+
+// addListenerMulti(slider, "touchstart mousedown", () => {
+// 	isDown = true;
+// 	slider.classList.add('active');
+// 	startX = event.pageX - slider.offsetLeft;
+// 	scrollLeft = slider.scrollLeft;
+// });
+
+// addListenerMulti(slider, "touchmove mousemove", () => {
+// 	if (!isDown) return;
+// 	const x = event.pageX - slider.offsetLeft;
+// 	const walk = (x - startX) * 3;
+// 	slider.scrollLeft = scrollLeft - walk;
+// });
+
+// addListenerMulti(slider, "touchend mouseup mouseleave", () => {
+// 	isDown = false;
+// 	slider.classList.remove('active');
+// });
 
 </script>
 
